@@ -1,0 +1,68 @@
+
+@import '~@angular/material/theming';
+@import '../styles/colors';
+
+$phone: 480px;
+$tablet: 700px;
+
+@mixin respond-to($media) {
+  
+  @if $media == $phone {
+    @media only screen and (max-width: $phone) { @content; }
+  }
+  
+}
+.menu {
+  width: 100%;
+  height: 4rem;
+  display: grid;
+  grid-gap: 2rem;
+  grid-column: auto;
+  justify-content: space-around;
+  grid-template-areas: ".titleApp searchInput .searchCategories";
+  @include respond-to($phone) {
+    height: 12rem;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.titleApp {
+  color: orange;
+  height: 60%;
+ @include respond-to($phone){
+  
+ }
+}
+.searchInput {
+  @include respond-to($phone){
+
+  }
+ // margin: 1rem, auto;
+}
+.searchCategories {  
+
+  @include respond-to($phone){
+  }
+ // margin: auto, 1rem;
+}
+.container {
+  padding: 1em;
+  border: 1px black;
+  @include respond-to($phone){
+    padding: 0;
+  }
+}
+.container-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 2rem;
+
+
+  @include respond-to($phone){
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+
+}
