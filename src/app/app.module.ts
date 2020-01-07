@@ -5,17 +5,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { CharacterComponent } from './components/character/character.component';
+import { EpisodeComponent } from './components/episode/episode.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CharacterComponent,
+    EpisodeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +33,8 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
     MatCardModule,
+    MatSlideToggleModule,
+    MatPaginatorModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

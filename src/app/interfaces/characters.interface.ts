@@ -1,5 +1,5 @@
 export interface Characters {
-  info: Info;
+  info?: Info;
   results: Character[];
 }
 

@@ -3,17 +3,16 @@
 @import '../styles/colors';
 
 $phone: 480px;
-$tablet: 700px;
+$tablet: 900px;
 
 @mixin respond-to($media) {
   @if $media == $phone {
     @media only screen and (max-width: $phone) { @content; }
   }
   @else if $media == $tablet {
-    @media only screen and (min-width: $phone - 1) and (max-width: 900px + 1) { @content; }
+    @media only screen and (min-width: $phone - 1) and (max-width: $tablet + 1) { @content; }
   }
 }
-
 
 .menu {
  // width: 100%
@@ -21,51 +20,53 @@ $tablet: 700px;
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 1fr 2fr 1fr;
+  @include respond-to($tablet){
+  //  grid-template-columns: 1fr 1fr / 2fr 2fr 2fr;
+    grid-gap: 1rem;
+  }
   @include respond-to($phone) {
     height: 9rem;
     min-width: 100vw;
-    grid: unset;
-    grid-template-areas:
-   "menu__titleApp" "menu__titleApp" "menu__titleApp" "menu__titleApp" 
-   "menu__searchCategories" "menu__searchInput";
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   &__titleApp {
     color: orange;
-    height: 60%;
+    margin-bottom: auto;
+    margin-top: 1rem;
    @include respond-to($phone){
-    max-height: 4px;
-    justify-self: center;
-
+     margin: 0;
    }
   }
   &__searchInput {
+    margin-bottom: auto;
+    margin-top: -.1rem;
     @include respond-to($phone){
-      max-height: 10px;
+      margin-top: -.4rem;
     }
    // margin: 1rem, auto;
   }
-  &__searchCategories {  
-  
+  &__mode {  
+    margin-bottom: 1rem;
+    box-sizing: border-box;
     @include respond-to($phone){
-      max-height: 10px;
     }
    // margin: auto, 1rem;
   }
 }
-
 .container {
-  padding: 1em;
+  padding: 1.2em;
   @include respond-to($phone){
     padding: 0;
     margin: 0;
   }
 }
-.container-cards {
+.container-characters {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 2rem;
-
+  grid-gap: 1.5rem;
 
   @include respond-to($tablet){
     padding: 0;
@@ -78,4 +79,9 @@ $tablet: 700px;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
   }
+}
+.container-episodes{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1.5rem;
 }

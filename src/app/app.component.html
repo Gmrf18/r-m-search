@@ -1,35 +1,15 @@
 <mat-toolbar color="primary" class="menu">
   <div class="menu__titleApp">RICK & MORTYS</div>
   <mat-form-field class="menu__searchInput">
-    <input matInput #searchInput placeholder="Seach your character" value="Rick">
+    <input matInput #searchInput [placeholder]="mode.message" value="">
   </mat-form-field>
-
-  <mat-form-field class="menu__searchCategories">
-    <mat-label >Categories</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let category of categories" [value]="category.id">
-        {{category.name}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-slide-toggle color="warn" class="menu__mode" (click)="changeMode()">Search <br> Mode <br></mat-slide-toggle>
 </mat-toolbar>
 
 <div class="container">
-  <div class="container-cards">
-    <mat-card class="card" *ngFor="let card of cards">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{card.name}}</mat-card-title>
-        <mat-card-subtitle>{{card.gender}}</mat-card-subtitle>
-      </mat-card-header>
-      <img mat-card-image [src]="card.image" [alt]="card.name">
-      <mat-card-content>
-        <p>
-          {{card.location.name}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+  <app-character class="container-characters" *ngIf="!mode.flag && cardsCharacter" [cardsCharacter]="cardsCharacter">
+  </app-character>
+  <app-episode class="container-episodes" *ngIf="mode.flag && listEpisodes" [listEpisodes]="listEpisodes"></app-episode>
+  <mat-paginator *ngIf="paginator" class="paginator" [length]="paginator.count" [pageSize]="20" (page)="getPage($event)" [hidePageSize]="true">
+  </mat-paginator>
 </div>

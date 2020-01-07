@@ -3,6 +3,7 @@ import { ApiService } from './services/api.service';
 import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Characters, Character } from './interfaces/characters.interface';
+import { Paginator } from './interfaces/paginator.interface';
 
 @Component({
   selector: 'app-root',
@@ -12,27 +13,27 @@ import { Characters, Character } from './interfaces/characters.interface';
 export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('searchInput', { static: false }) SearchInput: ElementRef;
-
-  cards: Character[]
-  public categories = [{name: 'all', id: 1}, {name: 'Episodes', id: 2}, {name: 'Characters', id: 3}]
+  messages = ['Search character', 'Search episode']
+  mode = {
+    flag: false,
+    messages: ['Search character', 'Search episode'],
+    message: this.messages[0]
+  }
+  cardsCharacter: Character[]
+  listEpisodes: Episode[]
   isSearching: boolean;
-  paginator: any;
-
+  paginator: Info
+  pageIndex = 0
   constructor(private apiService: ApiService) {
   }
-
   ngOnInit() {
-
-    this.apiService.getAny('rick').subscribe((x: Characters) => {
-      this.paginator = x
-      this.cards = x.results
-      console.log(x.results);
-
-    })
+    this.getEpisode('?page=2', true)
+  }
+  ngAfterViewInit() {
+    this.searchInit()
   }
 
-
-  ngAfterViewInit() {
+  searchInit() {
     fromEvent(this.SearchInput.nativeElement, 'keyup').pipe(
       // get value
       map((event: any) => {
@@ -46,18 +47,64 @@ export class AppComponent implements OnInit, AfterViewInit {
       , distinctUntilChanged()
       // subscription for response
     ).subscribe((text: string) => {
-      console.log('changed');
-
       this.isSearching = true;
       text = text.toUpperCase()
-      console.log(text);
-      this.apiService.getAny(text).subscribe((x: Characters) => {
-        this.paginator = x
-        this.cards = x.results
-        console.log(x.results);
-
-      })
+      !this.mode.flag ? this.getCharacters(text) : this.getEpisodes(text)
     });
+  }
+
+  getCharacters(text) {
+    this.apiService.getCharacters(text).subscribe((x: Characters) => {
+      this.setCards(x)
+    })
+  }
+  getCharacter(q) {
+    this.apiService.getCharacter(q).subscribe((x: Characters) => {
+      this.setCards(x)
+    })
+  }
+  getEpisodes(text) {
+    this.apiService.getEpisodes(text).subscribe((x: Episodes) => {
+      this.setList(x)
+    })
+  }
+  getEpisode(q, init?: boolean) {
+    this.apiService.getEpisode(q).subscribe((x: Episodes) => {
+      this.setList(x)
+      if (init) {
+        const charactersLastEpisode = x.results[x.results.length - 1].characters
+          .map(x => x.substring(x.lastIndexOf('/') + 1)).join(',')
+        this.getCharacter(charactersLastEpisode)
+      }
+    })
+  }
+  changeMode() {
+    this.mode.flag = !this.mode.flag
+    const selectedMode = Number(this.mode.flag)
+    this.mode.message = this.messages[selectedMode]
+  }
+  setList(x: Episodes) {
+    console.log(x);
+    this.paginator = x.info
+    this.listEpisodes = x.results
+  }
+  setCards(x: Characters) {
+    this.paginator = x.info || undefined
+    this.cardsCharacter = x.results || x as any;
+  }
+  getPage(pageIn: Paginator) {
+
+    let page = ''
+    if (this.pageIndex < pageIn.pageIndex) {
+      page = this.paginator.next
+      this.pageIndex++
+    } else {
+      page = this.paginator.prev
+      this.pageIndex--
+    }
+    this.apiService.getPage(page).subscribe((x: Episodes | Characters) => {
+      this.mode.flag ? this.setList(x as Episodes) : this.setCards(x as Characters)
+    })
   }
 }
 
