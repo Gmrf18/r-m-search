@@ -1,1 +1,15 @@
-episodessss
+  <mat-list *ngFor="let episode of listEpisodes">
+    <mat-list-item class="list">
+      <mat-panel-title>
+        {{episode.episode}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{episode.name}}
+      </mat-panel-description>
+      <mat-panel-description>
+        {{episode.air_date}}
+      </mat-panel-description>
+    </mat-list-item>
+    
+    <mat-divider></mat-divider>
+  </mat-list>

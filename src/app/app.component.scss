@@ -3,33 +3,44 @@
 @import '../styles/colors';
 
 $phone: 480px;
-$tablet: 900px;
+$landscape: 780px;
+$tablet: 980px;
 
 @mixin respond-to($media) {
   @if $media == $phone {
     @media only screen and (max-width: $phone) { @content; }
   }
+  @else if $media == $landscape {
+    @media only screen and (min-width: $phone - 1) and (max-width: $landscape + 1) { @content; }
+  }
   @else if $media == $tablet {
-    @media only screen and (min-width: $phone - 1) and (max-width: $tablet + 1) { @content; }
+    @media only screen and (min-width: $landscape - 1) and (max-width: $tablet + 1) { @content; }
   }
 }
 
 .menu {
- // width: 100%
+  max-width: 100%;
   height: 4rem;
   display: grid;
   grid-gap: 2rem;
   grid-template-columns: 1fr 2fr 1fr;
   @include respond-to($tablet){
-  //  grid-template-columns: 1fr 1fr / 2fr 2fr 2fr;
     grid-gap: 1rem;
   }
+
+  @include respond-to($landscape){
+    grid-gap: .5rem;
+  }
+
   @include respond-to($phone) {
-    height: 9rem;
-    min-width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+   
+    height: max-content;
+    grid: initial;
+    grid-template-areas: 
+    "menu__titleApp"
+    "menu__searchInput"
+    "menu__mode"
+    ;
   }
 
   &__titleApp {
@@ -37,6 +48,7 @@ $tablet: 900px;
     margin-bottom: auto;
     margin-top: 1rem;
    @include respond-to($phone){
+     justify-self: center;
      margin: 0;
    }
   }
@@ -44,20 +56,35 @@ $tablet: 900px;
     margin-bottom: auto;
     margin-top: -.1rem;
     @include respond-to($phone){
-      margin-top: -.4rem;
+      margin-top: -2.3rem;
+      font-size: medium;
     }
    // margin: 1rem, auto;
   }
   &__mode {  
     margin-bottom: 1rem;
     box-sizing: border-box;
+    font-size: medium;
+    color: orange;
     @include respond-to($phone){
+      font-size: small;
+      margin-top: -2rem;
+      margin-bottom: 1rem;
+      justify-self: center;
     }
    // margin: auto, 1rem;
   }
 }
 .container {
-  padding: 1.2em;
+
+  max-width: 100%;
+  padding: 1rem;
+
+  @include respond-to($landscape){
+    padding: 1em;
+    margin: 0;
+  }
+
   @include respond-to($phone){
     padding: 0;
     margin: 0;
@@ -65,13 +92,20 @@ $tablet: 900px;
 }
 .container-characters {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.5rem;
+
 
   @include respond-to($tablet){
     padding: 0;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
+  }
+
+  @include respond-to($landscape){
+    padding: 0;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: .5rem;
   }
 
   @include respond-to($phone){
@@ -80,8 +114,20 @@ $tablet: 900px;
     grid-gap: 1rem;
   }
 }
-.container-episodes{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 1.5rem;
+.container-episodes {
+  min-width: 100%;
+  // display: grid;
+  // grid-gap: 1.5rem;
+  // grid-template-columns: repeat(1fr);
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.card {
+  color: green;
+  background-color: green;
 }

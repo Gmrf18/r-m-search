@@ -3,13 +3,14 @@
   <mat-form-field class="menu__searchInput">
     <input matInput #searchInput [placeholder]="mode.message" value="">
   </mat-form-field>
-  <mat-slide-toggle color="warn" class="menu__mode" (click)="changeMode()">Search <br> Mode <br></mat-slide-toggle>
+  <mat-slide-toggle color="warn" class="menu__mode" (click)="changeMode()"> <span class="menu__mode"> Search Mode </span></mat-slide-toggle>
 </mat-toolbar>
 
 <div class="container">
   <app-character class="container-characters" *ngIf="!mode.flag && cardsCharacter" [cardsCharacter]="cardsCharacter">
   </app-character>
-  <app-episode class="container-episodes" *ngIf="mode.flag && listEpisodes" [listEpisodes]="listEpisodes"></app-episode>
+  <app-episode *ngIf="mode.flag && listEpisodes" class="container-episodes" [listEpisodes]="listEpisodes">
+  </app-episode>
   <mat-paginator *ngIf="paginator" class="paginator" [length]="paginator.count" [pageSize]="20" (page)="getPage($event)" [hidePageSize]="true">
   </mat-paginator>
 </div>

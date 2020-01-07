@@ -9,6 +9,7 @@ export class EpisodeComponent implements OnInit {
 
   @Input() listEpisodes: Episode[]
 
+  panelOpenState = false;
   constructor() { }
 
   ngOnInit() {

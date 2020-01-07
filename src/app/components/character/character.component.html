@@ -1,12 +1,13 @@
 <mat-card class="card" *ngFor="let card of cardsCharacter">
-  <mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+  <mat-card-header color="primary">
+    <div mat-card-avatar class="card">df</div>
     <mat-card-title>{{card.name}}</mat-card-title>
-    <mat-card-subtitle>{{card.gender}}</mat-card-subtitle>
+  <mat-card-subtitle>{{card.species}} {{card.gender}} </mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image [src]="card.image" [alt]="card.name">
   <mat-card-content>
     <p>
+      {{card.status}}
       {{card.location.name}}
     </p>
   </mat-card-content>
