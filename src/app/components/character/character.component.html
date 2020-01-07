@@ -1,16 +1,17 @@
-<mat-card class="card" *ngFor="let card of cardsCharacter">
-  <mat-card-header color="primary">
-    <div mat-card-avatar class="card">df</div>
+<mat-card class="card" style="background-color: #263238; color: #f2f2f2;" *ngFor="let card of cardsCharacter">
+  <mat-card-header >
+    <div mat-card-avatar class="card"></div>
     <mat-card-title>{{card.name}}</mat-card-title>
-  <mat-card-subtitle>{{card.species}} {{card.gender}} </mat-card-subtitle>
+  <mat-card-subtitle style="color: #f2f2f2;">{{card.species}} | {{card.gender}} 
+    | <span style="border-radius: 20px; color: white; padding: .4em;"
+    [ngStyle]="{'background-color':card.status === 'Alive' ? 'green' : 'red'}"> {{card.status}}</span> | {{card.location.name}} </mat-card-subtitle>
+  
   </mat-card-header>
-  <img mat-card-image [src]="card.image" [alt]="card.name">
   <mat-card-content>
-    <p>
-      {{card.status}}
-      {{card.location.name}}
-    </p>
-  </mat-card-content>
+  
+</mat-card-content>
+  <img mat-card-image [src]="card.image" [alt]="card.name">
+  
   <mat-card-actions>
   </mat-card-actions>
 </mat-card>

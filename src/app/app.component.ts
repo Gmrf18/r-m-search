@@ -72,11 +72,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.apiService.getEpisode(q).subscribe((x: Episodes) => {
       this.setList(x)
       if (init) {
-        const charactersLastEpisode = x.results[x.results.length - 1].characters
-          .map(x => x.substring(x.lastIndexOf('/') + 1)).join(',')
-        this.getCharacter(charactersLastEpisode)
+        const charactersLastEpisodeURL = x.results[x.results.length - 1].characters
+        this.getCharactersByEpisode(charactersLastEpisodeURL)
       }
     })
+  }
+  getCharactersByEpisodeLE(characterURLs: string[]) {
+    this.getCharactersByEpisode(characterURLs)
+    this.mode.flag = false
+  }
+  getCharactersByEpisode(characterURLs: string[]) {
+    const charactersByEpisode = characterURLs.map(x => x.substring(x.lastIndexOf('/') + 1)).join(',')
+    this.getCharacter(charactersByEpisode)
   }
   changeMode() {
     this.mode.flag = !this.mode.flag

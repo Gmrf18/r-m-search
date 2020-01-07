@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-episode',
@@ -8,11 +8,16 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EpisodeComponent implements OnInit {
 
   @Input() listEpisodes: Episode[]
+  @Output() oCharacters: EventEmitter<string[]> = new EventEmitter()
 
   panelOpenState = false;
   constructor() { }
 
   ngOnInit() {
+  }
+
+  goToEpisodeCharacters(characters: string[]) {
+    this.oCharacters.next(characters)
   }
 
 }

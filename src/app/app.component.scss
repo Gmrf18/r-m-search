@@ -122,12 +122,6 @@ $tablet: 980px;
 }
 .list {
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: stretch;
+  background-color: orangered;
 }
 
-.card {
-  color: green;
-  background-color: green;
-}
