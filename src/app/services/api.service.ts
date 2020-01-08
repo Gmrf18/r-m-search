@@ -42,9 +42,12 @@ export class ApiService {
 
   getEpisodes(q: string) {
     const episodeSeasonR = /S0/
+    const episodeNumberR = /^\d/
     return episodeSeasonR.test(q)
       ? this.getEpisodesBySeason(q)
-      : this.getEpisode(q).pipe(map(x => { results: [x]  }))
+      : episodeNumberR.test(q)
+      ? this.getEpisode(q).pipe(map(x => {return { results: [x]  }}))
+      : this.getEpisodesByName(q)
   }
 
   getPage(q) {
