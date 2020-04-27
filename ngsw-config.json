@@ -9,10 +9,10 @@
         "https://rickandmortyapi.com/api/character/avatar/*.jpeg"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 100,
-        "maxAge": "3d",
-        "timeout": "500u"
+        "maxAge": "2d",
+        "timeout": "1000u"
       }
     }
   ],
