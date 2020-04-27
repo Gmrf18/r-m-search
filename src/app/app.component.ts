@@ -4,6 +4,7 @@ import { fromEvent } from 'rxjs';
 import { map, filter, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Characters, Character } from './interfaces/characters.interface';
 import { Paginator } from './interfaces/paginator.interface';
+import { Episode, Info, Episodes } from './interfaces/episodes.interface';
 
 @Component({
   selector: 'app-root',

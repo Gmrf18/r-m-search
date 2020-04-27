@@ -1,9 +1,9 @@
-interface Episodes {
+export interface Episodes {
   info?: Info;
   results: Episode[];
 }
 
-interface Episode {
+export interface Episode {
   id: number;
   name: string;
   air_date: string;
@@ -13,7 +13,7 @@ interface Episode {
   created: string;
 }
 
-interface Info {
+export interface Info {
   count: number;
   pages: number;
   next: string;

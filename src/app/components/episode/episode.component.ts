@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Episode } from 'src/app/interfaces/episodes.interface';
 
 @Component({
   selector: 'app-episode',
