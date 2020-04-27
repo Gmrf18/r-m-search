@@ -1,19 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import '~@angular/material/theming';
-@import './styles/colors';
+@import "~@angular/material/theming";
+@import "./styles/colors";
 
 @include mat-core();
 
 @include angular-material-theme($my-app-theme);
 // comentario
 
-html, body { height: 100%; max-width: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-*{
+html,
+body {
+  height: 100%;
+  max-width: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+* {
   box-sizing: border-box;
 }
-
 
 $phone: 480px;
 $landscape: 780px;
@@ -21,30 +27,33 @@ $tablet: 1020px;
 
 @mixin respond-to($media) {
   @if $media == $tablet {
-    @media only screen and (max-width: $tablet) { @content; }
-  }
-  @else if $media == $landscape {
-    @media only screen and (max-width: $landscape + 1) { @content; }
-  }
-  @else if $media == $phone {
-  @media only screen and (max-width: $phone + 1) { @content; }
+    @media only screen and (max-width: $tablet) {
+      @content;
+    }
+  } @else if $media == $landscape {
+    @media only screen and (max-width: $landscape + 1) {
+      @content;
+    }
+  } @else if $media == $phone {
+    @media only screen and (max-width: $phone + 1) {
+      @content;
+    }
   }
 }
-
 
 .menu {
   //display: grid ;
   grid-template-areas: "a b c";
-  
-  @include respond-to($tablet){
+
+  @include respond-to($tablet) {
   }
 
-  @include respond-to($landscape){
+  @include respond-to($landscape) {
   }
 
   @include respond-to($phone) {
-   grid-template-areas: "a" "b" "c";
-
+    height: 200px !important;
+    grid-template-areas: "a" "b" "c";
   }
 
   &__titleApp {
@@ -52,21 +61,21 @@ $tablet: 1020px;
     color: orange;
     margin-bottom: auto;
     margin-top: 1rem;
-   @include respond-to($phone){
-     margin: 0;
-   }
+    @include respond-to($phone) {
+      margin: 0;
+    }
   }
   &__searchInput {
     grid-area: b;
     margin-bottom: auto;
-    margin-top: -.1rem;
-    @include respond-to($phone){
+    margin-top: -0.1rem;
+    @include respond-to($phone) {
       margin: 0;
       font-size: medium;
     }
-   // margin: 1rem, auto;
+    // margin: 1rem, auto;
   }
-  &__mode {  
+  &__mode {
     grid-area: c;
     margin-bottom: 1rem;
     box-sizing: border-box;
@@ -77,23 +86,22 @@ $tablet: 1020px;
       justify-content: flex-end;
     }
 
-    @include respond-to($phone){
+    @include respond-to($phone) {
       font-size: small;
     }
-   // margin: auto, 1rem;
+    // margin: auto, 1rem;
   }
 }
 .container {
-
   max-width: 100%;
   padding: 1rem;
 
-  @include respond-to($landscape){
+  @include respond-to($landscape) {
     padding: 1em;
     margin: 0;
   }
 
-  @include respond-to($phone){
+  @include respond-to($phone) {
     padding: 0;
     margin: 0;
   }
@@ -103,20 +111,19 @@ $tablet: 1020px;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1.5rem;
 
-
-  @include respond-to($tablet){
+  @include respond-to($tablet) {
     padding: 0;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
   }
 
-  @include respond-to($landscape){
+  @include respond-to($landscape) {
     padding: 0;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: .5rem;
+    grid-gap: 0.5rem;
   }
 
-  @include respond-to($phone){
+  @include respond-to($phone) {
     padding: 0;
     grid-template-columns: 1fr;
     grid-gap: 1rem;
@@ -124,12 +131,8 @@ $tablet: 1020px;
 }
 .container-episodes {
   min-width: 100%;
-  // display: grid;
-  // grid-gap: 1.5rem;
-  // grid-template-columns: repeat(1fr);
 }
 .list {
   display: flex;
   background-color: orangered;
 }
-
